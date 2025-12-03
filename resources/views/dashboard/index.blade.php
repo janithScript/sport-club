@@ -104,9 +104,25 @@
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
-                    <span class="trend-indicator positive">
-                        <i class="fas fa-arrow-up"></i> 12%
-                    </span>
+                    @if(isset($eventsTrend))
+                        @if($eventsTrend['direction'] == 'up')
+                            <span class="trend-indicator positive">
+                                <i class="fas fa-arrow-up"></i> {{ $eventsTrend['percentage'] }}%
+                            </span>
+                        @elseif($eventsTrend['direction'] == 'down')
+                            <span class="trend-indicator negative">
+                                <i class="fas fa-arrow-down"></i> {{ $eventsTrend['percentage'] }}%
+                            </span>
+                        @else
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i> {{ $eventsTrend['percentage'] }}%
+                            </span>
+                        @endif
+                    @else
+                        <span class="trend-indicator positive">
+                            <i class="fas fa-arrow-up"></i> 12%
+                        </span>
+                    @endif
                     <span class="trend-text">vs last month</span>
                 </div>
                 <div class="stat-chart">
@@ -131,9 +147,25 @@
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
-                    <span class="trend-indicator positive">
-                        <i class="fas fa-arrow-up"></i> 8%
-                    </span>
+                    @if(isset($reservationsTrend))
+                        @if($reservationsTrend['direction'] == 'up')
+                            <span class="trend-indicator positive">
+                                <i class="fas fa-arrow-up"></i> {{ $reservationsTrend['percentage'] }}%
+                            </span>
+                        @elseif($reservationsTrend['direction'] == 'down')
+                            <span class="trend-indicator negative">
+                                <i class="fas fa-arrow-down"></i> {{ $reservationsTrend['percentage'] }}%
+                            </span>
+                        @else
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i> {{ $reservationsTrend['percentage'] }}%
+                            </span>
+                        @endif
+                    @else
+                        <span class="trend-indicator positive">
+                            <i class="fas fa-arrow-up"></i> 8%
+                        </span>
+                    @endif
                     <span class="trend-text">vs last month</span>
                 </div>
                 <div class="stat-chart">
@@ -161,9 +193,25 @@
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
-                    <span class="trend-indicator neutral">
-                        <i class="fas fa-minus"></i> 0%
-                    </span>
+                    @if(isset($messagesTrend))
+                        @if($messagesTrend['direction'] == 'up')
+                            <span class="trend-indicator positive">
+                                <i class="fas fa-arrow-up"></i> {{ $messagesTrend['percentage'] }}%
+                            </span>
+                        @elseif($messagesTrend['direction'] == 'down')
+                            <span class="trend-indicator negative">
+                                <i class="fas fa-arrow-down"></i> {{ $messagesTrend['percentage'] }}%
+                            </span>
+                        @else
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i> {{ $messagesTrend['percentage'] }}%
+                            </span>
+                        @endif
+                    @else
+                        <span class="trend-indicator neutral">
+                            <i class="fas fa-minus"></i> 0%
+                        </span>
+                    @endif
                     <span class="trend-text">vs last month</span>
                 </div>
                 <div class="stat-chart">
@@ -938,6 +986,11 @@ body {
 .trend-indicator.positive {
     color: var(--success-color);
     background: rgba(72, 187, 120, 0.1);
+}
+
+.trend-indicator.negative {
+    color: var(--danger-color);
+    background: rgba(245, 101, 101, 0.1);
 }
 
 .trend-indicator.neutral {
