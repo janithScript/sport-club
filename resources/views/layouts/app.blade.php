@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Sports Club Management')</title>
+    <title>@yield('title', 'Sports Club')</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -44,6 +44,7 @@
                     <li><a href="{{ route('events.index') }}">Events</a></li>
                     
                     @auth
+                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
                         <li><a href="{{ route('equipment.index') }}">Equipment</a></li>
                         <li><a href="{{ route('messages.index') }}">Messages</a></li>
                         <li><a href="{{ route('profile.show') }}">Profile</a></li>
@@ -72,7 +73,7 @@
         <nav class="navbar">
             <div class="container">
                 <a href="{{ route('home') }}" class="navbar-brand desktop-brand">
-                    <i class="fas fa-trophy me-2"></i>Sports Club Management
+                    <i class="fas fa-trophy me-2"></i>Sports Club
                 </a>
                 
                 <ul class="navbar-nav">
@@ -80,6 +81,7 @@
                     <li><a href="{{ route('events.index') }}">Events</a></li>
                     
                     @auth
+                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
                         <li><a href="{{ route('equipment.index') }}">Equipment</a></li>
                         <li><a href="{{ route('messages.index') }}">Messages</a></li>
                         <li><a href="{{ route('profile.show') }}">Profile</a></li>

@@ -13,8 +13,8 @@
                 <a href="{{ route('register') }}" class="btn btn-success">Join Now</a>
                 <a href="{{ route('events.index') }}" class="btn btn-secondary">View Events</a>
             @else
-                <a href="{{ route('events.index') }}" class="btn btn-success">Explore Events</a>
-                <a href="{{ route('equipment.index') }}" class="btn btn-secondary">Browse Equipment</a>
+                <a href="{{ route('dashboard.index') }}" class="btn btn-success">My Dashboard</a>
+                <a href="{{ route('events.index') }}" class="btn btn-secondary">Explore Events</a>
             @endguest
         </div>
     </div>
