@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -35,7 +36,20 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_admin;
+        // Debugging: Log the panel ID and user admin status
+        Log::info('Checking panel access', [
+            'panel_id' => $panel->getId(),
+            'user_is_admin' => $this->is_admin,
+            'user_id' => $this->id
+        ]);
+        
+        // Check if this is the admin panel and user is an admin
+        if ($panel->getId() === 'admin') {
+            return $this->is_admin ?? false;
+        }
+        
+        // For other panels, allow access
+        return true;
     }
 
     public function events()
