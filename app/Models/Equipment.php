@@ -29,9 +29,9 @@ class Equipment extends Model
             ->whereIn('status', ['reserved', 'borrowed']);
     }
 
-    public function checkAvailability($from, $to, $quantity = 1)
+    public function checkAvailability($from, $to, $quantity = 1, $excludeReservationId = null)
     {
-        $overlappingReservations = $this->reservations()
+        $query = $this->reservations()
             ->whereIn('status', ['reserved', 'borrowed'])
             ->where(function ($query) use ($from, $to) {
                 $query->whereBetween('reserved_from', [$from, $to])
@@ -40,8 +40,14 @@ class Equipment extends Model
                         $q->where('reserved_from', '<=', $from)
                           ->where('reserved_to', '>=', $to);
                     });
-            })
-            ->sum('quantity');
+            });
+
+        // Exclude a specific reservation if provided (for updates)
+        if ($excludeReservationId) {
+            $query->where('id', '!=', $excludeReservationId);
+        }
+
+        $overlappingReservations = $query->sum('quantity');
 
         return ($this->available_quantity - $overlappingReservations) >= $quantity;
     }

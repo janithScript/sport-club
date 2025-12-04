@@ -33,6 +33,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
             
+        // Get all equipment reservations for the user
+        $userReservations = $user->equipmentReservations()
+            ->with('equipment')
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
         // Get unread messages
         $unreadMessages = $user->receivedMessages()
             ->whereNull('read_at')
@@ -82,6 +88,7 @@ class DashboardController extends Controller
         return view('dashboard.index', compact(
             'registeredEvents', 
             'recentReservations', 
+            'userReservations',
             'unreadMessages',
             'eventsTrend',
             'reservationsTrend',

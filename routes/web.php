@@ -50,6 +50,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/equipment/{equipment}', [EquipmentController::class, 'show'])->name('equipment.show');
     Route::post('/equipment/reserve', [EquipmentReservationController::class, 'store'])
         ->name('equipment.reserve');
+    // Equipment reservation edit and delete routes
+    Route::get('/equipment/reservations/{reservation}/edit', [EquipmentReservationController::class, 'edit'])
+        ->name('equipment.reservations.edit');
+    Route::put('/equipment/reservations/{reservation}', [EquipmentReservationController::class, 'update'])
+        ->name('equipment.reservations.update');
+    Route::delete('/equipment/reservations/{reservation}', [EquipmentReservationController::class, 'destroy'])
+        ->name('equipment.reservations.destroy');
     
     // Messages
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');

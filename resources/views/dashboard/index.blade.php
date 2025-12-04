@@ -100,7 +100,7 @@
             </div>
             <div class="stat-content">
                 <span class="stat-label">Upcoming Events</span>
-                <span class="stat-value counter" data-target="{{ $registeredEvents->count() }}">0</span>
+                <span class="stat-value counter" data-target="{{ $registeredEvents->count() }}">{{ $registeredEvents->count() }}</span>
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
@@ -143,7 +143,7 @@
             </div>
             <div class="stat-content">
                 <span class="stat-label">Equipment Reservations</span>
-                <span class="stat-value counter" data-target="{{ $recentReservations->count() }}">0</span>
+                <span class="stat-value counter" data-target="{{ $recentReservations->count() }}">{{ $recentReservations->count() }}</span>
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
@@ -189,7 +189,7 @@
             </div>
             <div class="stat-content">
                 <span class="stat-label">Unread Messages</span>
-                <span class="stat-value counter" data-target="{{ $unreadMessages }}">0</span>
+                <span class="stat-value counter" data-target="{{ $unreadMessages }}">{{ $unreadMessages }}</span>
             </div>
             <div class="stat-footer">
                 <div class="stat-trend">
@@ -252,103 +252,102 @@
 
     <!-- Main Content with Enhanced Layout -->
     <div class="main-content">
-        <!-- Events Section -->
-        <div class="content-card events-card priority-section glass-effect">
-            <div class="card-header enhanced-header">
-                <div class="header-content">
-                    <h3 class="card-title">
-                        <i class="fas fa-calendar-alt title-icon"></i>
-                        Your Upcoming Events
-                    </h3>
-                    <p class="card-subtitle">Stay on top of your schedule</p>
-                </div>
-                <div class="header-actions">
-                    <button class="filter-btn">
-                        <i class="fas fa-filter"></i>
-                    </button>
-                    <a href="{{ route('events.index') }}" class="btn-modern primary pulse">
-                        <span>View All Events</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="card-content">
-                @if($registeredEvents->count() > 0)
-                    <div class="events-list enhanced-list">
-                        @foreach($registeredEvents as $index => $event)
-                            <div class="event-item advanced-item" data-index="{{ $index }}">
-                                <div class="event-indicator"></div>
-                                <div class="event-date modern-date">
-                                    <span class="date-day">{{ $event->start_at->format('d') }}</span>
-                                    <span class="date-month">{{ $event->start_at->format('M') }}</span>
-                                    <span class="date-year">{{ $event->start_at->format('Y') }}</span>
-                                </div>
-                                <div class="event-details enhanced-details">
-                                    <div class="event-header">
-                                        <h4 class="event-title">{{ $event->title }}</h4>
-                                        <div class="event-priority">
-                                            <span class="priority-badge high">High Priority</span>
-                                        </div>
-                                    </div>
-                                    <div class="event-meta">
-                                        <p class="event-time">
-                                            <i class="fas fa-clock"></i>
-                                            {{ $event->start_at->format('g:i A') }}
-                                        </p>
-                                        @if($event->location)
-                                            <p class="event-location">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                                {{ $event->location }}
-                                            </p>
-                                        @endif
-                                    </div>
-                                    <p class="event-description">{{ Str::limit($event->description, 100) }}</p>
-                                    <div class="event-participants">
-                                        <div class="participants-avatars">
-                                            <div class="avatar">
-                                                <i class="fas fa-user"></i>
-                                            </div>
-                                            <span class="participants-count">+15 others</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="event-actions enhanced-actions">
-                                    <button class="action-btn quick-action" title="Quick View">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <a href="{{ route('events.show', $event) }}" class="btn-modern outline">
-                                        <span>View Details</span>
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
+        <div class="main-content-left">
+            <!-- Events Section -->
+            <div class="content-card events-card priority-section glass-effect">
+                <div class="card-header enhanced-header">
+                    <div class="header-content">
+                        <h3 class="card-title">
+                            <i class="fas fa-calendar-alt title-icon"></i>
+                            Your Upcoming Events
+                        </h3>
+                        <p class="card-subtitle">Stay on top of your schedule</p>
                     </div>
-                @else
-                    <div class="empty-state enhanced-empty">
-                        <div class="empty-animation">
-                            <div class="empty-icon animated">
-                                <i class="fas fa-calendar-times"></i>
-                            </div>
-                            <div class="empty-particles">
-                                <div class="particle"></div>
-                                <div class="particle"></div>
-                                <div class="particle"></div>
-                            </div>
-                        </div>
-                        <h4>No Events Registered</h4>
-                        <p>Discover exciting sports events and activities waiting for you!</p>
-                        <a href="{{ route('events.index') }}" class="btn-modern primary glow">
-                            <span>Explore Events</span>
-                            <i class="fas fa-search"></i>
+                    <div class="header-actions">
+                        <button class="filter-btn">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <a href="{{ route('events.index') }}" class="btn-modern primary pulse">
+                            <span>View All Events</span>
+                            <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                @endif
+                </div>
+                <div class="card-content">
+                    @if($registeredEvents->count() > 0)
+                        <div class="events-list enhanced-list">
+                            @foreach($registeredEvents as $index => $event)
+                                <div class="event-item advanced-item" data-index="{{ $index }}">
+                                    <div class="event-indicator"></div>
+                                    <div class="event-date modern-date">
+                                        <span class="date-day">{{ $event->start_at->format('d') }}</span>
+                                        <span class="date-month">{{ $event->start_at->format('M') }}</span>
+                                        <span class="date-year">{{ $event->start_at->format('Y') }}</span>
+                                    </div>
+                                    <div class="event-details enhanced-details">
+                                        <div class="event-header">
+                                            <h4 class="event-title">{{ $event->title }}</h4>
+                                            <div class="event-priority">
+                                                <span class="priority-badge high">High Priority</span>
+                                            </div>
+                                        </div>
+                                        <div class="event-meta">
+                                            <p class="event-time">
+                                                <i class="fas fa-clock"></i>
+                                                {{ $event->start_at->format('g:i A') }}
+                                            </p>
+                                            @if($event->location)
+                                                <p class="event-location">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    {{ $event->location }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <p class="event-description">{{ Str::limit($event->description, 100) }}</p>
+                                        <div class="event-participants">
+                                            <div class="participants-avatars">
+                                                <div class="avatar">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <span class="participants-count">+15 others</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event-actions enhanced-actions">
+                                        <button class="action-btn quick-action" title="Quick View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a href="{{ route('events.show', $event) }}" class="btn-modern outline">
+                                            <span>View Details</span>
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="empty-state enhanced-empty">
+                            <div class="empty-animation">
+                                <div class="empty-icon animated">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                                <div class="empty-particles">
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                </div>
+                            </div>
+                            <h4>No Events Registered</h4>
+                            <p>Discover exciting sports events and activities waiting for you!</p>
+                            <a href="{{ route('events.index') }}" class="btn-modern primary glow">
+                                <span>Explore Events</span>
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
 
-        <!-- Enhanced Sidebar -->
-        <div class="sidebar-content">
             <!-- Quick Actions with Advanced Styling -->
             <div class="content-card actions-card priority-section glass-effect">
                 <div class="card-header enhanced-header">
@@ -478,6 +477,95 @@
                     @endif
                 </div>
             </div>
+        </div>
+
+        <div class="main-content-right">
+            <!-- Equipment Reservations Section -->
+            <div class="content-card reservations-card priority-section glass-effect">
+                <div class="card-header enhanced-header">
+                    <div class="header-content">
+                        <h3 class="card-title">
+                            <i class="fas fa-dumbbell title-icon"></i>
+                            Your Equipment Reservations
+                        </h3>
+                        <p class="card-subtitle">Manage your reserved equipment</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="{{ route('equipment.index') }}" class="btn-modern primary pulse">
+                            <span>Reserve More</span>
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-content">
+                    @if($userReservations->count() > 0)
+                        <div class="reservations-list enhanced-list">
+                            @foreach($userReservations as $reservation)
+                                <div class="reservation-item advanced-item" data-reservation-id="{{ $reservation->id }}">
+                                    <div class="reservation-indicator {{ $reservation->status }}"></div>
+                                    <div class="reservation-details enhanced-details">
+                                        <div class="reservation-header">
+                                            <h4 class="reservation-title">{{ $reservation->equipment->name }}</h4>
+                                            <div class="reservation-status">
+                                                <span class="status-badge {{ $reservation->status }}">{{ ucfirst($reservation->status) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="reservation-meta">
+                                            <p class="reservation-period">
+                                                <i class="fas fa-calendar"></i>
+                                                {{ $reservation->reserved_from->format('M d, Y') }} - {{ $reservation->reserved_to->format('M d, Y') }}
+                                            </p>
+                                            <p class="reservation-quantity">
+                                                <i class="fas fa-hashtag"></i>
+                                                Quantity: {{ $reservation->quantity }}
+                                            </p>
+                                        </div>
+                                        @if($reservation->status === 'reserved' || $reservation->status === 'borrowed')
+                                            <div class="reservation-actions enhanced-actions">
+                                                @if($reservation->status === 'reserved')
+                                                    <a href="{{ route('equipment.reservations.edit', $reservation) }}" class="btn-modern outline edit-reservation">
+                                                        <span>Edit</span>
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                @endif
+                                                @if($reservation->status === 'reserved')
+                                                    <form action="{{ route('equipment.reservations.destroy', $reservation) }}" method="POST" class="delete-reservation-form">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-modern danger" onclick="return confirm('Are you sure you want to delete this reservation?')">
+                                                            <span>Delete</span>
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="empty-state enhanced-empty">
+                            <div class="empty-animation">
+                                <div class="empty-icon animated">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                                <div class="empty-particles">
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                </div>
+                            </div>
+                            <h4>No Equipment Reserved</h4>
+                            <p>Reserve sports equipment for your activities!</p>
+                            <a href="{{ route('equipment.index') }}" class="btn-modern primary glow">
+                                <span>Browse Equipment</span>
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            </div>
 
             <!-- Weather Widget -->
             <div class="content-card weather-card glass-effect">
@@ -534,6 +622,7 @@
     --dark-color: #1a202c;
     --light-color: #f7fafc;
     --text-primary: #1a202c;
+
     --text-secondary: #718096;
     --border-color: #e2e8f0;
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -1041,6 +1130,47 @@ body {
 }
 
 /* Enhanced Content Cards */
+.main-content {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.main-content-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-content-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.content-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--backdrop-blur);
+}
+
+.content-card:hover {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.priority-section {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);
+}
+
+/* Enhanced Content Cards */
 /* Enhanced Sidebar with better spacing */
 .sidebar-content {
     display: flex;
@@ -1514,53 +1644,194 @@ body {
     border: 1px solid var(--border-color);
 }
 
+/* Equipment Reservations Styles */
+.reservation-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.reservation-item:last-child {
+    border-bottom: none;
+}
+
+.reservation-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.reservation-indicator.reserved {
+    background: var(--warning-color);
+    box-shadow: 0 0 10px var(--warning-color);
+}
+
+.reservation-indicator.borrowed {
+    background: var(--info-color);
+    box-shadow: 0 0 10px var(--info-color);
+}
+
+.reservation-indicator.returned {
+    background: var(--success-color);
+    box-shadow: 0 0 10px var(--success-color);
+}
+
+.reservation-indicator.cancelled {
+    background: var(--danger-color);
+    box-shadow: 0 0 10px var(--danger-color);
+}
+
+.reservation-details {
+    flex: 1;
+}
+
 .reservation-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .reservation-title {
-    font-size: 0.875rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
 }
 
-.reservation-status {
-    font-size: 0.625rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 12px;
-    font-weight: 600;
+.reservation-status .status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.reservation-status.active {
-    background: rgba(72, 187, 120, 0.1);
+.reservation-status .status-badge.reserved {
+    background: rgba(237, 137, 54, 0.15);
+    color: var(--warning-color);
+}
+
+.reservation-status .status-badge.borrowed {
+    background: rgba(66, 153, 225, 0.15);
+    color: var(--info-color);
+}
+
+.reservation-status .status-badge.returned {
+    background: rgba(72, 187, 120, 0.15);
     color: var(--success-color);
 }
 
-.reservation-date {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin: 0 0 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+.reservation-status .status-badge.cancelled {
+    background: rgba(245, 101, 101, 0.15);
+    color: var(--danger-color);
 }
 
-.reservation-progress {
+.reservation-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.reservation-period,
+.reservation-quantity {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.reservation-period i,
+.reservation-quantity i {
+    font-size: 0.8rem;
+}
+
+.reservation-actions {
+    display: flex;
     gap: 0.75rem;
 }
 
-.progress-text {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+/* Button styles for reservation actions */
+.reservation-actions .btn-modern {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reservation-actions .btn-modern.outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.reservation-actions .btn-modern.danger {
+    background: rgba(245, 101, 101, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(245, 101, 101, 0.3);
+}
+
+.reservation-actions .btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reservation-actions form {
+    display: inline-block;
+    margin: 0;
+}
+
+.reservation-item:hover {
+    background: rgba(102, 126, 234, 0.03);
+    transform: translateX(5px);
+}
+
+/* Responsive adjustments for reservations */
+@media (max-width: 768px) {
+    .reservation-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .reservation-indicator {
+        margin-right: 0;
+    }
+    
+    .reservation-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .reservation-meta {
+        justify-content: center;
+    }
+    
+    .reservation-actions {
+        justify-content: center;
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .reservation-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+[data-theme="dark"] .reservation-actions .btn-modern.outline {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .reservation-actions .btn-modern.danger {
+    background: rgba(245, 101, 101, 0.2);
 }
 
 /* Weather Widget */
@@ -1835,9 +2106,11 @@ body {
 [data-theme="dark"] .timeline-content {
     background: rgba(45, 55, 72, 0.5);
 }
+
 [data-theme="dark"] .stat-icon {
     color: var(--icon-light-bg);
 }
+
 [data-theme="dark"] .enhanced-header {
     background: linear-gradient(135deg, rgba(1, 21, 28, 0.8), rgba(255, 255, 255, 0.5));
 }
@@ -1993,6 +2266,8 @@ document.addEventListener('DOMContentLoaded', function() {
             function animateCounters() {
                 document.querySelectorAll('.counter[data-target]').forEach(counter => {
                     const target = parseInt(counter.dataset.target) || 0;
+                    // Set initial text content to 0 for animation
+                    counter.textContent = '0';
                     gsap.to({value: 0}, {
                         duration: 2,
                         value: target,
@@ -2204,6 +2479,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update last updated time
             lastUpdatedElement.textContent = 'Just now';
+            
+            // Re-animate counters
+            animateCounters();
             
             // Simulate data refresh animation
             if (typeof gsap !== 'undefined') {
