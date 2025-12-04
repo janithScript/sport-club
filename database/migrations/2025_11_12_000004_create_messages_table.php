@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->text('body');
             $table->timestamp('read_at')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps(); // This will create both created_at and updated_at
         });
     }
 

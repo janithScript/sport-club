@@ -20,9 +20,8 @@ class Message extends Model
     protected $casts = [
         'read_at' => 'datetime',
         'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
-
-    public $timestamps = false;
 
     public function sender()
     {
