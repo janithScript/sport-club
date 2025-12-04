@@ -42,7 +42,12 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <div class="password-container">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <span class="toggle-password" onclick="togglePasswordVisibility()">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </div>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -204,6 +209,27 @@ body {
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.form-control {
+    padding-right: 40px;
+}
+
 .form-check-input:checked {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -338,5 +364,20 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
 });
+
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.querySelector('.toggle-password i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    }
+}
 </script>
 @endsection
