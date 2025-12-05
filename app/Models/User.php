@@ -78,4 +78,52 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }
+
+    /**
+     * Get upcoming events for the user within 24 hours
+     */
+    public function getUpcomingEvents()
+    {
+        return $this->eventRegistrations()
+            ->whereHas('event', function ($query) {
+                $query->where('start_at', '>=', now())
+                      ->where('start_at', '<=', now()->addHours(24));
+            })
+            ->with('event')
+            ->get();
+    }
+
+    /**
+     * Get equipment reservations that are due within 24 hours
+     */
+    public function getDueEquipmentReservations()
+    {
+        return $this->equipmentReservations()
+            ->where('status', 'borrowed')
+            ->where('due_at', '>=', now())
+            ->where('due_at', '<=', now()->addHours(24))
+            ->with('equipment')
+            ->get();
+    }
+
+    /**
+     * Get count of notifications (upcoming events + due equipment)
+     */
+    public function getNotificationCount()
+    {
+        $upcomingEventsCount = $this->eventRegistrations()
+            ->whereHas('event', function ($query) {
+                $query->where('start_at', '>=', now())
+                      ->where('start_at', '<=', now()->addHours(24));
+            })
+            ->count();
+
+        $dueEquipmentCount = $this->equipmentReservations()
+            ->where('status', 'borrowed')
+            ->where('due_at', '>=', now())
+            ->where('due_at', '<=', now()->addHours(24))
+            ->count();
+
+        return $upcomingEventsCount + $dueEquipmentCount;
+    }
 }

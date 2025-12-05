@@ -12,6 +12,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Notifications routes
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index')->middleware('auth');
+Route::get('/notifications/count', [NotificationController::class, 'count'])->name('notifications.count')->middleware('auth');
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {

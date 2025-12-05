@@ -9,6 +9,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,10 +22,70 @@
 </head>
 
 <body>
-    <div id="app" x-data="{ mobileMenuOpen: false }">
+    <div id="app" x-data="{
+        mobileMenuOpen: false,
+        notifications: [],
+        notificationCount: 0,
+        showNotifications: false,
+        init() {
+            this.loadNotificationCount();
+        },
+        loadNotificationCount() {
+            @auth
+            fetch('/notifications/count')
+                .then(response => response.json())
+                .then(data => {
+                    this.notificationCount = data.count;
+                });
+            @endauth
+        },
+        loadNotifications() {
+            @auth
+            fetch('/notifications')
+                .then(response => response.json())
+                .then(data => {
+                    this.notifications = data.notifications;
+                    this.notificationCount = data.count;
+                    this.showNotifications = true;
+                });
+            @endauth
+        },
+        markAsRead(notification) {
+            // Handle notification click based on type
+            if (notification.type === 'event') {
+                // Redirect to event page
+                window.location.href = `/events/${notification.event_id}`;
+            } else {
+                // For equipment notifications, just hide the dropdown
+                this.showNotifications = false;
+            }
+            
+            // Decrease notification count
+            this.notificationCount = Math.max(0, this.notificationCount - 1);
+            
+            // Remove the notification from the list
+            this.notifications = this.notifications.filter(n => n.id !== notification.id);
+            
+            // If this was the last notification, hide the dropdown after a short delay
+            if (this.notificationCount === 0) {
+                setTimeout(() => {
+                    this.showNotifications = false;
+                }, 100);
+            }
+        },
+        toggleNotifications() {
+            if (this.showNotifications) {
+                this.showNotifications = false;
+                // Refresh notification count when closing
+                this.loadNotificationCount();
+            } else {
+                this.loadNotifications();
+            }
+        }
+    }">
         <!-- Mobile Header and Navigation Container -->
         <div class="mobile-container">
-            <!-- Mobile Menu Toggle Button -->
+            
             <!-- Mobile Header -->
             <div class="mobile-header">
                 <div class="container">
@@ -40,10 +101,33 @@
                     </a>
                     
                     <!-- Notification Bell - Right Corner -->
-                    <a href="#" class="notification-bell">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </a>
+                    @auth
+                    <div class="dropdown notification-dropdown">
+                        <a href="#" class="notification-bell" @click.prevent="toggleNotifications()">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" x-show="notificationCount > 0" x-text="notificationCount"></span>
+                        </a>
+                        <div class="dropdown-menu notification-menu" x-show="showNotifications">
+                            <template x-if="notifications.length > 0">
+                                <template x-for="notification in notifications" :key="notification.id">
+                                    <div class="notification-item" @click="markAsRead(notification)">
+                                        <div class="notification-content">
+                                            <p x-text="notification.message"></p>
+                                            <small x-text="notification.time_remaining"></small>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                            <template x-if="notifications.length === 0">
+                                <div class="notification-item">
+                                    <div class="notification-content no-notifications">
+                                        <p>You have no notifications at the moment</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    @endauth
                 </div>
             </div>
 
@@ -108,10 +192,33 @@
                                 </button>
                             </form>
                         </li>
-                        <li><a href="#" class="notification-bell">
-                            <i class="fas fa-bell"></i>
-                            <span class="notification-badge">3</span>
-                        </a></li>
+                        <li class="nav-item-desktop">
+                            <div class="dropdown notification-dropdown">
+                                <a href="#" class="notification-bell" @click.prevent="toggleNotifications()">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="notification-badge" x-show="notificationCount > 0" x-text="notificationCount"></span>
+                                </a>
+                                <div class="dropdown-menu notification-menu" x-show="showNotifications">
+                                    <template x-if="notifications.length > 0">
+                                        <template x-for="notification in notifications" :key="notification.id">
+                                            <div class="notification-item" @click="markAsRead(notification)">
+                                                <div class="notification-content">
+                                                    <p x-text="notification.message"></p>
+                                                    <small x-text="notification.time_remaining"></small>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template x-if="notifications.length === 0">
+                                        <div class="notification-item">
+                                            <div class="notification-content no-notifications">
+                                                <p>You have no notifications at the moment</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </li>
                     @else
                         <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
                         <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Register</a></li>

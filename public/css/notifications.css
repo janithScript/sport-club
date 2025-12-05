@@ -1,0 +1,92 @@
+/* Notification Dropdown Styles */
+.notification-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-bell {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+}
+
+.notification-bell:hover {
+  color: #ddd;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-content p {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.notification-content small {
+  color: #777;
+  font-size: 12px;
+}
+
+/* Desktop specific styles */
+.navbar .notification-dropdown {
+  margin-left: 15px;
+}
+
+/* Mobile specific styles */
+.mobile-header .notification-dropdown {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* No notifications message */
+.no-notifications {
+  padding: 20px;
+  text-align: center;
+  color: #777;
+}
