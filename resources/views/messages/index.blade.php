@@ -213,12 +213,11 @@ body {
 .page-title {
     font-size: 2.5rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 1rem;
-    color: var(--text-primary);
 }
 
 .title-icon {
