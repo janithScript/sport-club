@@ -1251,7 +1251,7 @@ main {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.75rem;
+    margin-left: -150px !important;
     width: 48px;
     height: 48px;
     border-radius: 10px;
@@ -1274,14 +1274,14 @@ main {
 
 .navbar-brand {
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     font-weight: 700;
     text-decoration: none;
     flex: 1;
     text-align: center;
     margin: 0;
     position: relative;
-    left: 0; /* Ensures proper left alignment */
+    left: 0; /* Ensures left corner positioning */   
 }
 
 .notification-bell {
@@ -1346,6 +1346,7 @@ main {
     
     .navbar-brand {
         font-size: 1.7rem; /* Slightly smaller for mobile */
+        margin-left: 65px;
     }
     
     .menu-toggle,
