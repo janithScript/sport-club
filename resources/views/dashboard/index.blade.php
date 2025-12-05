@@ -226,18 +226,11 @@
                                             @endif
                                         </div>
                                         <p class="event-description">{{ Str::limit($event->description, 100) }}</p>
-                                        <div class="event-participants">
-                                            <div class="participants-avatars">
-                                                <div class="avatar">
-                                                    <i class="fas fa-user"></i>
-                                                </div>
-                                                <span class="participants-count">+15 others</span>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="event-actions enhanced-actions">
                                         <button class="action-btn quick-action" title="Quick View">
-                                            <i class="fas fa-eye"></i>
+                                            
                                         </button>
                                         <a href="{{ route('events.show', $event) }}" class="btn-modern outline">
                                             <span>View Details</span>
