@@ -25,17 +25,28 @@
         <!-- Mobile Header and Navigation Container -->
         <div class="mobile-container">
             <!-- Mobile Menu Toggle Button -->
+            <!-- Mobile Header -->
             <div class="mobile-header">
                 <div class="container">
+                    <!-- Menu Toggle - Left Corner -->
+                    <button class="menu-toggle" @click="mobileMenuOpen = !mobileMenuOpen">
+                        <i :class="mobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'" 
+                        style="transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);"></i>
+                    </button>
+                    
+                    <!-- Brand - Center Left -->
                     <a href="{{ route('home') }}" class="navbar-brand">
                         <i class="fas fa-trophy me-2"></i>Sports Club
                     </a>
-                    <button class="menu-toggle" @click="mobileMenuOpen = !mobileMenuOpen">
-                        <i :class="mobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'" 
-                        style="transition: transform 0.3s ease;"></i>
-                    </button>
+                    
+                    <!-- Notification Bell - Right Corner -->
+                    <a href="#" class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
                 </div>
             </div>
+
             
             <!-- Mobile Navigation -->
             <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
@@ -60,9 +71,7 @@
                                 </button>
                             </form>
                         </li>
-                        <li><a href="#" class="notification-bell">
-                            <i class="fas fa-bell"></i>
-                        </a></li>
+                        
                     @else
                         <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
                         <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Register</a></li>
@@ -101,6 +110,7 @@
                         </li>
                         <li><a href="#" class="notification-bell">
                             <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
                         </a></li>
                     @else
                         <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
