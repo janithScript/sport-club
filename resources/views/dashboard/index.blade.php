@@ -102,33 +102,7 @@
                 <span class="stat-label">Upcoming Events</span>
                 <span class="stat-value counter" data-target="{{ $registeredEvents->count() }}">{{ $registeredEvents->count() }}</span>
             </div>
-            <div class="stat-footer">
-                <div class="stat-trend">
-                    @if(isset($eventsTrend))
-                        @if($eventsTrend['direction'] == 'up')
-                            <span class="trend-indicator positive">
-                                <i class="fas fa-arrow-up"></i> {{ $eventsTrend['percentage'] }}%
-                            </span>
-                        @elseif($eventsTrend['direction'] == 'down')
-                            <span class="trend-indicator negative">
-                                <i class="fas fa-arrow-down"></i> {{ $eventsTrend['percentage'] }}%
-                            </span>
-                        @else
-                            <span class="trend-indicator neutral">
-                                <i class="fas fa-minus"></i> {{ $eventsTrend['percentage'] }}%
-                            </span>
-                        @endif
-                    @else
-                        <span class="trend-indicator positive">
-                            <i class="fas fa-arrow-up"></i> 12%
-                        </span>
-                    @endif
-                    <span class="trend-text">vs last month</span>
-                </div>
-                <div class="stat-chart">
-                    <canvas class="mini-chart" data-chart="line"></canvas>
-                </div>
-            </div>
+            
         </div>
 
         <div class="stat-card modern-card" data-color="success" data-value="{{ $recentReservations->count() }}">
@@ -145,33 +119,7 @@
                 <span class="stat-label">Equipment Reservations</span>
                 <span class="stat-value counter" data-target="{{ $recentReservations->count() }}">{{ $recentReservations->count() }}</span>
             </div>
-            <div class="stat-footer">
-                <div class="stat-trend">
-                    @if(isset($reservationsTrend))
-                        @if($reservationsTrend['direction'] == 'up')
-                            <span class="trend-indicator positive">
-                                <i class="fas fa-arrow-up"></i> {{ $reservationsTrend['percentage'] }}%
-                            </span>
-                        @elseif($reservationsTrend['direction'] == 'down')
-                            <span class="trend-indicator negative">
-                                <i class="fas fa-arrow-down"></i> {{ $reservationsTrend['percentage'] }}%
-                            </span>
-                        @else
-                            <span class="trend-indicator neutral">
-                                <i class="fas fa-minus"></i> {{ $reservationsTrend['percentage'] }}%
-                            </span>
-                        @endif
-                    @else
-                        <span class="trend-indicator positive">
-                            <i class="fas fa-arrow-up"></i> 8%
-                        </span>
-                    @endif
-                    <span class="trend-text">vs last month</span>
-                </div>
-                <div class="stat-chart">
-                    <canvas class="mini-chart" data-chart="bar"></canvas>
-                </div>
-            </div>
+            
         </div>
 
         <div class="stat-card modern-card" data-color="warning" data-value="{{ $unreadMessages }}">
@@ -191,33 +139,7 @@
                 <span class="stat-label">Unread Messages</span>
                 <span class="stat-value counter" data-target="{{ $unreadMessages }}">{{ $unreadMessages }}</span>
             </div>
-            <div class="stat-footer">
-                <div class="stat-trend">
-                    @if(isset($messagesTrend))
-                        @if($messagesTrend['direction'] == 'up')
-                            <span class="trend-indicator positive">
-                                <i class="fas fa-arrow-up"></i> {{ $messagesTrend['percentage'] }}%
-                            </span>
-                        @elseif($messagesTrend['direction'] == 'down')
-                            <span class="trend-indicator negative">
-                                <i class="fas fa-arrow-down"></i> {{ $messagesTrend['percentage'] }}%
-                            </span>
-                        @else
-                            <span class="trend-indicator neutral">
-                                <i class="fas fa-minus"></i> {{ $messagesTrend['percentage'] }}%
-                            </span>
-                        @endif
-                    @else
-                        <span class="trend-indicator neutral">
-                            <i class="fas fa-minus"></i> 0%
-                        </span>
-                    @endif
-                    <span class="trend-text">vs last month</span>
-                </div>
-                <div class="stat-chart">
-                    <canvas class="mini-chart" data-chart="doughnut"></canvas>
-                </div>
-            </div>
+           
         </div>
 
         <div class="stat-card modern-card" data-color="info">
