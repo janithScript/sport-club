@@ -40,15 +40,14 @@
             <!-- Mobile Navigation -->
             <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
                 <ul class="navbar-nav mobile-nav">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('events.index') }}">Events</a></li>
+                    <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ route('events.index') }}" class="{{ request()->routeIs('events.index') || request()->routeIs('events.show') ? 'active' : '' }}">Events</a></li>
                     
                     @auth
-                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
-                        <li><a href="{{ route('equipment.index') }}">Equipment</a></li>
-                        <li><a href="{{ route('messages.index') }}">Messages</a></li>
-                        <li><a href="{{ route('profile.show') }}">Profile</a></li>
-                        
+                        <li><a href="{{ route('dashboard.index') }}" class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+                        <li><a href="{{ route('equipment.index') }}" class="{{ request()->routeIs('equipment.index') || request()->routeIs('equipment.show') ? 'active' : '' }}">Equipment</a></li>
+                        <li><a href="{{ route('messages.index') }}" class="{{ request()->routeIs('messages.index') || request()->routeIs('messages.show') || request()->routeIs('messages.conversation') ? 'active' : '' }}">Messages</a></li>
+                        <li><a href="{{ route('profile.show') }}" class="{{ request()->routeIs('profile.show') ? 'active' : '' }}">Profile</a></li>
                         @if(auth()->user()->is_admin)
                             <li><a href="/admin" target="_blank">Admin Panel</a></li>
                         @endif
@@ -61,9 +60,12 @@
                                 </button>
                             </form>
                         </li>
+                        <li><a href="#" class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                        </a></li>
                     @else
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
+                        <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Register</a></li>
                     @endauth
                 </ul>
             </div>
@@ -77,15 +79,14 @@
                 </a>
                 
                 <ul class="navbar-nav">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('events.index') }}">Events</a></li>
+                    <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ route('events.index') }}" class="{{ request()->routeIs('events.index') || request()->routeIs('events.show') ? 'active' : '' }}">Events</a></li>
                     
                     @auth
-                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
-                        <li><a href="{{ route('equipment.index') }}">Equipment</a></li>
-                        <li><a href="{{ route('messages.index') }}">Messages</a></li>
-                        <li><a href="{{ route('profile.show') }}">Profile</a></li>
-                        
+                        <li><a href="{{ route('dashboard.index') }}" class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+                        <li><a href="{{ route('equipment.index') }}" class="{{ request()->routeIs('equipment.index') || request()->routeIs('equipment.show') ? 'active' : '' }}">Equipment</a></li>
+                        <li><a href="{{ route('messages.index') }}" class="{{ request()->routeIs('messages.index') || request()->routeIs('messages.show') || request()->routeIs('messages.conversation') ? 'active' : '' }}">Messages</a></li>
+                        <li><a href="{{ route('profile.show') }}" class="{{ request()->routeIs('profile.show') ? 'active' : '' }}">Profile</a></li>
                         @if(auth()->user()->is_admin)
                             <li><a href="/admin" target="_blank">Admin Panel</a></li>
                         @endif
@@ -98,9 +99,12 @@
                                 </button>
                             </form>
                         </li>
+                        <li><a href="#" class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                        </a></li>
                     @else
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
+                        <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Register</a></li>
                     @endauth
                 </ul>
             </div>
