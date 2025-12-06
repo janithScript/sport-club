@@ -66,12 +66,12 @@ p {
     z-index: 1000;
 }
 
-.navbar .container {
+.navbar > .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -80,6 +80,8 @@ p {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
+    flex-shrink: 0; /* Prevent brand from shrinking */
+    margin-right: 2rem; /* Space between brand and nav items */
 }
 
 .desktop-brand {
@@ -91,6 +93,9 @@ p {
     list-style: none;
     gap: 1.5rem;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* Push nav items to the right */
 }
 
 .navbar-nav a {
@@ -764,12 +769,13 @@ p {
         color: white;
         font-size: 1.5rem;
         cursor: pointer;
-        padding: 0.5rem;
         transition: transform 0.3s ease;
         border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
+        left: 0;
+        margin-left: -100px;
     }
     
     .menu-toggle:hover {
@@ -1251,7 +1257,6 @@ main {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    margin-left: -150px !important;
     width: 48px;
     height: 48px;
     border-radius: 10px;
@@ -1260,7 +1265,6 @@ main {
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    left: 0; /* Ensures left corner positioning */
 }
 
 .menu-toggle:hover {
@@ -1272,16 +1276,16 @@ main {
     transform: scale(0.95);
 }
 
-.navbar-brand {
+.desktop-brand.navbar-brand {
     color: white;
     font-size: 1.7rem;
     font-weight: 700;
     text-decoration: none;
-    flex: 1;
-    text-align: center;
+    flex-shrink: 0;
+    text-align: left;
     margin: 0;
     position: relative;
-    left: 0; /* Ensures left corner positioning */   
+    left: 0;
 }
 
 .notification-bell {
