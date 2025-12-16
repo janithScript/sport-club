@@ -7,6 +7,11 @@
 
     <title>@yield('title', 'Sports Club')</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" onerror="this.style.display='none'">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}" onerror="this.style.display='none'">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">

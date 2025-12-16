@@ -237,7 +237,7 @@
 
             <!-- Registered Members -->
             @if($event->confirmedRegistrations->count() > 0)
-                <div class="members-card modern-card">
+                <div class="members-card modern-card" style="margin-top:10px;">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-users title-icon"></i>
@@ -807,6 +807,9 @@ body {
     background: rgba(102, 126, 234, 0.2);
 }
 
+[data-theme="dark"] .card-title {
+    color:var(--text-primary);
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
     .event-content {
